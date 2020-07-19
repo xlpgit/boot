@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    #div {
+        float: none;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div id="div">
+    <p>用户名密码登陆</p>
+    <!-- <input type="text" style="display: none">-->
+    <p>
+        <label>
+            <input type="text" name="userName" id="phone" placeholder="手机">
+        </label>
+    </p>
+    <p>
+        <label>
+            <input type="text" name="password" id="password" placeholder="密码">
+        </label>
+    </p>
+    <p>
+        <input type="submit" value="登陆" onclick="login()">
+    </p>
+</div>
+</body>
+<script type="application/javascript">
+    function login() {
+        var phone = $("#phone").val();
+        var password = $("#password").val();
+        if (phone == null || password == null) {
+            alert("phone or password is null");
+            return;
+        }
+        $.ajax({
+            url: '/user/login?phone=' + phone + '&password=' + password,
+            success: function (data) {
+                console.dir(data.code);
+                if(data.code==1){
+
+                }else{
+                    alert(data.message);
+                }
+
+            },
+            error: function (error) {
+
+            }
+        })
+    }
+
+</script>
+</html>
