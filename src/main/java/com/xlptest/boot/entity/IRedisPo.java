@@ -7,5 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.Serializable;
 
 public interface IRedisPo extends Serializable {
+    public String getPrimary();
+
+    public String getKey();
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Controller
 @RequestMapping("user")
@@ -48,6 +49,14 @@ public class UserController {
     @RequestMapping("register")
     @ResponseBody
     public ResultPo register(HttpServletRequest request, UserInfo userInfo) {
-        return null;
+        Date date = new Date();
+        long time = date.getTime();
+        userInfo.setId(time);
+        userService.save(userInfo);
+        ResultPo resultPo = ResultPo.getInstance();
+        resultPo.setCode(ErrorCode.SUCCESS);
+        resultPo.setMessage("register");
+        resultPo.putData("user", userInfo);
+        return resultPo;
     }
 }

@@ -3,9 +3,9 @@ package com.xlptest.boot.entity;
 
 public class UserInfo implements IRedisPo {
 
+    private long id;
     private String phone;
     private String name;
-    private int id;
     private int age;
     private String password;
     private String address;
@@ -26,11 +26,11 @@ public class UserInfo implements IRedisPo {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -56,5 +56,15 @@ public class UserInfo implements IRedisPo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String getPrimary() {
+        return this.phone;
+    }
+
+    @Override
+    public String getKey() {
+        return "h:get:list";
     }
 }

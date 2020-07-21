@@ -37,4 +37,8 @@ public class ResultPo {
             data = new HashMap<>();
         data.put(key, value);
     }
+
+    public static ResultPo getInstance() {
+        return new ResultPo();
+    }
 }

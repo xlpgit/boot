@@ -14,7 +14,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserInfo save(UserInfo userInfo) {
-        redisService.hSet(key, userInfo.getPhone(), userInfo);
+        redisService.hSetFromObject(userInfo);
         return userInfo;
     }
 

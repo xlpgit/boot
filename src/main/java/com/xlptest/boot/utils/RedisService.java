@@ -12,6 +12,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Tuple;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -577,7 +578,7 @@ public class RedisService {
         mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
         T t = null;
         try {
-            if (json == null || json.isEmpty() || json=="") {
+            if (json == null || json.isEmpty()) {
                 return null;
             }
             t = mapper.readValue(json, clazz);
@@ -598,6 +599,26 @@ public class RedisService {
             e.printStackTrace();
         }
         this.hset(key, filed, json);
+    }
+
+
+    public void hSetFromObject(IRedisPo po) {
+        String key = po.getKey();
+        String pk = po.getPrimary();
+        this.hSet(key, pk, po);
+    }
+
+    public <T> T hgetFromObject(String key, String filed, Class<T> clazz) {
+        Class<?>[] interfacts = clazz.getInterfaces();
+        try {
+            Field field = interfacts[0].getDeclaredField("getKey");
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
     }
 
 
