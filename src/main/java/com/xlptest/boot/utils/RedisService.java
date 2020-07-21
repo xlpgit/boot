@@ -496,7 +496,7 @@ public class RedisService {
         try {
             jedis = jedisPool.getResource();
             jedis.hset(key, field, value);
-            if (seconds != -1) {
+            if (seconds >1) {
                 jedis.expire(key, seconds);
             }
         } catch (Exception e) {

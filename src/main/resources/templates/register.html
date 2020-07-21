@@ -3,23 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <h3>欢迎注册</h3>
-    </div>
-    <div>
-        <p>
-            <label>手机号</label>
-            <input type="text" placeholder="手机号">
-        </p>
-        <p>
-            <label>密码</label>
-            <input type="text" placeholder="密码">
-        </p>
-        <p>
-            <input type="submit" value="注册">
-        </p>
-    </div>
+<div>
+    <h3>欢迎注册</h3>
+</div>
+<div>
+    <p>
+        <label>手机号</label>
+        <input type="text" placeholder="手机号" id="phone">
+    </p>
+    <p>
+        <label>密码</label>
+        <input type="text" placeholder="密码" id="password">
+    </p>
+    <p>
+        <label>用户名</label>
+        <input type="text" placeholder="用户名" id="name">
+    </p>
+    <p>
+        <label>年龄</label>
+        <input type="number" placeholder="年龄" id="age">
+    </p>
+    <p>
+        <label>地址</label>
+        <input type="text" placeholder="地址" id="address">
+    </p>
+    <p>
+        <input type="submit" value="注册" onclick="register()">
+    </p>
+</div>
 </body>
+
+<script type="application/javascript">
+    function register() {
+        var phone = $("#phone").val();
+        var password = $("#password").val();
+        var name = $("#name").val();
+        var age = $("#age").val();
+        var address = $("#address").val();
+        var data = {};
+        data['phone'] = phone;
+        data['password'] = password;
+        data['name'] = name;
+        data['age'] = age;
+        data['address'] = address;
+
+        $.ajax({
+            url: '/user/register?',
+            data: data,
+            success: function (data) {
+                console.dir(data);
+
+
+            },
+            error: function (error) {
+
+            }
+        })
+    }
+
+</script>
+
 </html>

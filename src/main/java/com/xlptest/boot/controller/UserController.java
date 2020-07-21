@@ -52,7 +52,7 @@ public class UserController {
         Date date = new Date();
         long time = date.getTime();
         userInfo.setId(time);
-        userService.save(userInfo);
+        userService.save(userInfo);//前台传过来的
         ResultPo resultPo = ResultPo.getInstance();
         resultPo.setCode(ErrorCode.SUCCESS);
         resultPo.setMessage("register");
