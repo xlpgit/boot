@@ -65,6 +65,6 @@ public class UserInfo implements IRedisPo {
 
     @Override
     public String getKey() {
-        return "h:get:list";
+        return "h:user:order";
     }
 }
