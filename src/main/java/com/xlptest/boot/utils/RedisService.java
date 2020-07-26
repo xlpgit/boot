@@ -364,6 +364,24 @@ public class RedisService {
         }
     }
 
+    public boolean setExString(String key, String value, int seconds) {
+        Jedis jedis = null;
+        boolean sucess = true;
+        try {
+            jedis = jedisPool.getResource();
+            jedis.setex(key, seconds, value);
+        } catch (Exception e) {
+            sucess = false;
+            returnBrokenResource(jedis, "setExString", e);
+            // expire(key, 0);
+        } finally {
+            if (sucess && jedis != null) {
+                returnResource(jedis);
+            }
+        }
+        return sucess;
+    }
+
     public String getString(String key) {
         Jedis jedis = null;
         boolean sucess = true;
@@ -496,7 +514,7 @@ public class RedisService {
         try {
             jedis = jedisPool.getResource();
             jedis.hset(key, field, value);
-            if (seconds >1) {
+            if (seconds > 1) {
                 jedis.expire(key, seconds);
             }
         } catch (Exception e) {

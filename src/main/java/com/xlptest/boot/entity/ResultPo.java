@@ -3,6 +3,7 @@ package com.xlptest.boot.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+//请求返回统一处理格式
 public class ResultPo {
     private int code;
     private String message;
