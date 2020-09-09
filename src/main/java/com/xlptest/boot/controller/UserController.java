@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("user")
-public class UserController {
+public class UserController  extends BaseController{
 
     @Autowired
     UserService userService;
