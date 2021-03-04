@@ -49,14 +49,14 @@ public class UserController  extends BaseController{
         //若session已经存在，且在有效期内，无法在另一处登陆，现在加上顶替
         HttpSession session = request.getSession();
         String token = session.getId();
-        String key="token:"+userInfo.getId();
+        String key = "token:" + userInfo.getId();
         String oldSession = redisService.getString(key);
-        if(session.equals(oldSession)){
+        if (session.equals(oldSession)) {
             resultPo.setCode(ErrorCode.SUCCESS);
             resultPo.setMessage("login success");
-        }else{
+        } else {
             try {
-                redisService.setString(key,token,1800);
+                redisService.setString(key, token, 1800);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -79,5 +79,12 @@ public class UserController  extends BaseController{
         resultPo.setMessage("register");
         resultPo.putData("user", userInfo);
         return resultPo;
+    }
+
+    @RequestMapping("test")
+    @ResponseBody
+    public String test() {
+        userService.updatePassword();
+        return "success";
     }
 }

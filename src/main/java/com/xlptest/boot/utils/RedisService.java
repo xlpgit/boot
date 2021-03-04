@@ -1,5 +1,6 @@
 package com.xlptest.boot.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -568,18 +569,7 @@ public class RedisService {
         Map<String, String> map = this.hgetAll(key);
         Collection<String> values = map.values();
         List<T> result = new ArrayList<>();
-        values.forEach((item) -> {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-            mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
-            try {
-                T cache = mapper.readValue(item, clazz);
-                result.add((cache));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-
-        });
+        values.forEach((item) -> result.add(JSON.parseObject(item, clazz)));
         return result;
     }
 
@@ -591,18 +581,7 @@ public class RedisService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ObjectMapper mapper = new ObjectMapper();//解析器支持解析单引号
-        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);//解析器支持解析结束符
-        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
-        T t = null;
-        try {
-            if (json == null || json.isEmpty()) {
-                return null;
-            }
-            t = mapper.readValue(json, clazz);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        T t = JSON.parseObject(json, clazz);
         return t;
 
     }
@@ -611,11 +590,7 @@ public class RedisService {
     public void hSet(String key, String filed, IRedisPo po) {
         ObjectMapper mapper = new ObjectMapper();
         String json = null;
-        try {
-            json = mapper.writeValueAsString(po); //返回字符串
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        json = JSON.toJSONString(po);
         this.hset(key, filed, json);
     }
 
