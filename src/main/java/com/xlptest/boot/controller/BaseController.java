@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author twjitm
- */
+
 @Controller
 public class BaseController {
     @InitBinder
