@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-@Controller
+@RestController
 @RequestMapping("test")
 public class HelloController {
 
@@ -20,11 +23,11 @@ public class HelloController {
     HelloService helloService;
 
     @RequestMapping("hello")
-    public String hello(Model model) {
-        model.addAttribute("now", DateFormat.getDateTimeInstance());
-        return "hello";
+    public String hello() {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
+        return "Hello jenkins,the current time is " + simpleDateFormat.format(date);
     }
-
 
 
 }
