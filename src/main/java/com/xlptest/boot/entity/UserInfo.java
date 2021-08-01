@@ -1,7 +1,9 @@
 package com.xlptest.boot.entity;
 
 
-public class UserInfo implements IRedisPo {
+import com.alibaba.fastjson.annotation.JSONField;
+
+public class UserInfo extends BaseRedisPo {
 
     private long id;
     private String phone;
@@ -58,6 +60,7 @@ public class UserInfo implements IRedisPo {
         this.address = address;
     }
 
+
     @Override
     public String getPrimary() {
         return this.phone;
@@ -65,6 +68,6 @@ public class UserInfo implements IRedisPo {
 
     @Override
     public String getKey() {
-        return "h:get:list";
+        return "h:user:list";
     }
 }

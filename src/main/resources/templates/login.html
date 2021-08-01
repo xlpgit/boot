@@ -19,11 +19,10 @@
 </head>
 <body>
 <div id="div">
-    <p>用户名密码登陆</p>
-    <!-- <input type="text" style="display: none">-->
+    <h3>欢迎登录</h3>
     <p>
         <label>
-            <input type="text" name="userName" id="phone" placeholder="手机">
+            <input type="text" name="phone" id="phone" placeholder="手机">
         </label>
     </p>
     <p>
@@ -47,7 +46,7 @@
         $.ajax({
             url: '/user/login?phone=' + phone + '&password=' + password,
             success: function (data) {
-                console.dir(data.code);
+                console.dir(data.message);
                 if(data.code==1){
 
                 }else{

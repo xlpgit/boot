@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--以xml方式启动测试类-->
+<suite name="Suite" parallel="false">
+    <test name="Test">
+        <classes>
+            <class name="com.xlptest.boot.Demo"/>
+        </classes>
+    </test>
+
+</suite>
